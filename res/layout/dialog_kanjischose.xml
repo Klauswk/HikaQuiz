@@ -1,0 +1,64 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="top"
+    tools:context=".MainActivity" >
+
+    <TextView
+        android:id="@+id/tvGrade2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvGrade1"
+        android:layout_centerHorizontal="true"
+        android:text="Grade 2" />
+
+    <TextView
+        android:id="@+id/tvGrade3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvGrade2"
+        android:layout_below="@+id/tvGrade2"
+        android:text="Grade 3" />
+
+    <TextView
+        android:id="@+id/tvGrade4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvGrade3"
+        android:layout_below="@+id/tvGrade3"
+        android:text="Grade 4" />
+
+    <TextView
+        android:id="@+id/tvGrade5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/tvGrade4"
+        android:layout_below="@+id/tvGrade4"
+        android:text="Grade 5" />
+
+    <TextView
+        android:id="@+id/tvGrade6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvGrade4"
+        android:layout_below="@+id/tvGrade5"
+        android:text="Grade 6" />
+
+    <TextView
+        android:id="@+id/tvGrade7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvGrade6"
+        android:layout_below="@+id/tvGrade6"
+        android:text="Grade 7" />
+
+    <TextView
+        android:id="@+id/tvGrade1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvGrade2"
+        android:layout_alignParentTop="true"
+        android:text="Grade 1" />
+
+</RelativeLayout>
