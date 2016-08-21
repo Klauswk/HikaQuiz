@@ -1,0 +1,64 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.MainActivity" >
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <CheckBox
+                android:id="@+id/cbHira"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hiraganas" />
+
+            <CheckBox
+                android:id="@+id/cbKata"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Katakanas" />
+
+            <CheckBox
+                android:id="@+id/cbModHira"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mod. Hiraganas" />
+
+            <CheckBox
+                android:id="@+id/cbModKata"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mod. Katakanas" />
+
+            <CheckBox
+                android:id="@+id/cbYouHira"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Youon Hiraganas" />
+
+            <CheckBox
+                android:id="@+id/cbYouKata"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Youon Katakanas" />
+
+            <Button
+                android:id="@+id/btOptionsOK"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Save Options" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

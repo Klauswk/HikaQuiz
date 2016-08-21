@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.hika"
+    android:versionCode="1"
+    android:versionName="1.0">
+
+    <uses-sdk
+        android:minSdkVersion="15"
+        android:targetSdkVersion="23" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:theme="@style/hikaquiztheme"
+        android:label="HikaQuiz"
+        android:name=".HikaQuizApplication"
+         >
+        <activity
+            android:name=".activity.MainActivity"
+            android:label="HikaQuiz" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.ActivityQuizChooser"/>
+        <activity android:name=".activity.ActivityQuestionnaire" android:screenOrientation="landscape"/>
+        <activity android:name=".activity.ActivityOptions"/>
+        <activity android:name=".activity.ActivityHikaList"/>
+        <activity android:name=".activity.KanjiActivity"/>
+    </application>
+
+</manifest>

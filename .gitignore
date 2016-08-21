@@ -2,3 +2,9 @@
 .classpath
 bin/
 gen/
+app/build/
+build/
+.idea/
+local.properties
+*.iml
+.gradle/
