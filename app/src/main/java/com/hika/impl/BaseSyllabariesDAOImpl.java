@@ -31,7 +31,6 @@ public class BaseSyllabariesDAOImpl implements BaseSyllabariesDAO {
     @Override
     public List<Syllabarie> getAllSyllabaries() {
         Cursor cursor = database.query("questionnaire", null, null, null, null, null, null);
-        cursor.moveToFirst();
 
         ArrayList<Syllabarie> syllabaries = new ArrayList<>();
 

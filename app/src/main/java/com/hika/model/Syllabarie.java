@@ -8,10 +8,10 @@ package com.hika.model;
 
 public class Syllabarie {
 
-    public int id;
-    public String syllabary;
-    public String translation;
-    public SyllabaryType syllabaryType;
+    protected int id;
+    protected String syllabary;
+    protected String translation;
+    protected SyllabaryType syllabaryType;
 
     public Syllabarie() {
     }

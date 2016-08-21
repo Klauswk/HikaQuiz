@@ -8,5 +8,5 @@ package com.hika.model;
 
 public enum SyllabaryType {
 
-    HIRAKANA,KATAKANA;
+    HIRAKANA,KATAKANA, KANJI, ANIMAL, HOUSETHING,CLOTHE;
 }

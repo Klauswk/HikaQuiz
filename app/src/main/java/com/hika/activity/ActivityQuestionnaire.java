@@ -1,5 +1,6 @@
 package com.hika.activity;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
@@ -8,7 +9,6 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,10 +16,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hika.R;
+import com.hika.dao.KanjiDAO;
+import com.hika.impl.KanjiDAOImpl;
+import com.hika.model.Syllabarie;
+import com.hika.service.QuestionnaraireService;
+import com.hika.service.QuestionnaraireServiceImpl;
 
 public class ActivityQuestionnaire extends Activity{
-	private SQLiteDatabase database;
-	private Cursor cursor;
+
 	private int Key;
 	private Bundle bundle;
 	private TextView tvQuestion;
@@ -27,54 +31,49 @@ public class ActivityQuestionnaire extends Activity{
 	private Button btAnswer;
 	private String Resposta;
 	private int PerguntaGerada;
-	private SharedPreferences shared;
 	private int grade = 1;
+
+	private QuestionnaraireService questionnaraireService;
+	private KanjiDAO kanjiDAO;
+	private List<Syllabarie> syllabaries;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_questionnaire);
+
+		questionnaraireService = new QuestionnaraireServiceImpl();
+
+
+		kanjiDAO = new KanjiDAOImpl(openOrCreateDatabase("Hirakadb.db", MODE_PRIVATE, null));
+
 		bundle = getIntent().getExtras();
 		Key = bundle.getInt("Choosed");
 		grade = bundle.getInt("GRADE");
-		database = openOrCreateDatabase("Hirakadb.db", MODE_PRIVATE, null);
 
 		switch (Key)
 		{
-		case 1:
-			shared = getSharedPreferences("Options", MODE_PRIVATE);
-			String checkboxes = shared.getString("options", "");
-			StringBuilder sb = new StringBuilder();
-			String[] array = checkboxes.split("#");
-			sb.append("key_chooser in(");
-			sb.append(array[1]);
-			for (int i = 2; i < array.length; i++) {
-				sb.append(",");
-				sb.append(array[i]);
-			}
-			sb.append(")");
-			cursor = database.query("questionnaire", new String[]{"Question","Answer"}, sb.toString(), null, null, null, null);
-			cursor.moveToFirst();
-			break;
+			case 1:
+				syllabaries = kanjiDAO.getFilteredHirakanaKatakanaList(getSharedPreferences("Options", MODE_PRIVATE));
+				break;
 
-		case 2:
-			cursor = database.query("kanjis", null , "grade = " + String.valueOf(grade), null, null, null, null);
-			cursor.moveToFirst();
-			break;
+			case 2:
+				syllabaries = kanjiDAO.getFilteredKanjiList(String.valueOf(grade));
+				break;
 
-		case 3:
-			cursor = database.query("animals", null , null, null, null, null, null);
-			cursor.moveToFirst();
-			break;
+			case 3:
+				syllabaries = kanjiDAO.getAnimalList();
+				break;
 
-		case 4:
-			cursor = database.query("clothes", null , null, null, null, null, null);
-			cursor.moveToFirst();
-			break;
+			case 4:
+				syllabaries = kanjiDAO.getClothList();
+				break;
 
-		case 5:
-			cursor = database.query("houseobjects", null , null, null, null, null, null);
-			cursor.moveToFirst();
-			break;
+			case 5:
+				syllabaries = kanjiDAO.getHouseThingList();
+				break;
 		}
+
 		setContentView(R.layout.activity_questionnaire);
 		Casts();
 		tvQuestion.setTextSize(100);
@@ -90,30 +89,13 @@ public class ActivityQuestionnaire extends Activity{
 		btAnswer = (Button) findViewById(R.id.btAnswer);
 	}
 
-	private int gerarNumero(int inicio, int maximo)
-	{
-		Random random = new Random();
-		if (inicio > maximo) {
-			while(inicio>maximo)
-			{
-				inicio--;
-			}
-		}
-		long extensao = (long)maximo - (long)inicio + 1;
-		long fraction = (long)(extensao * random.nextDouble());
-		int Numerogerado =  (int)(fraction + inicio);    
-		return Numerogerado;
-	}
-
 	private void GeraPergunta()
 	{
-		PerguntaGerada = gerarNumero(0,cursor.getCount()-1);
-		cursor.moveToFirst();
-		for (int i = 0; i < PerguntaGerada; i++) {
-			cursor.moveToNext();
-		}
-		tvQuestion.setText(cursor.getString(cursor.getColumnIndex("Question")));
-		Resposta = cursor.getString(cursor.getColumnIndex("Answer"));
+		PerguntaGerada = questionnaraireService.randomNumber(0,syllabaries.size()-1);
+
+		Syllabarie syllabary = syllabaries.get(PerguntaGerada);
+		tvQuestion.setText(syllabary.getSyllabary());
+		Resposta = syllabary.getTranslation();
 		Resposta = Resposta.toLowerCase(new Locale("English"));
 	}
 
